@@ -2,20 +2,25 @@
 <html>
 <head>
   <title>Slider test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style> 
     div {
         width: 300px;
         height: 300px;
-        transition: all 3.9s ease;
+        transition: all 6s ease-in-out;
         background-image: url(https://source.unsplash.com/GXOGGENgHnQ/1600x900);
     }
-
-    div:hover {
-        background-image: url(https://source.unsplash.com/Jy6luiLBsrk/1600x900);
-    }    
    
     .slidecontainer {
         width: 100%;
+    }
+
+    #changeBack {
+        transition: all 3s ease-out;
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.5s;
+        animation-name: fade;
+        animation-duration: 1.5s;
     }
 
     .slider {
@@ -27,11 +32,11 @@
         opacity: 0.7;
         -webkit-transition: .2s;
         transition: opacity .2s;
-        opacity: 1;
+        opacity: .0;
     }
 
     .slider:hover {
-        opacity: .5;
+        opacity: .0;
     }
 
     .slider::-webkit-slider-thumb {
@@ -41,7 +46,7 @@
         height: 200px;
         background: #4CAF50;
         cursor: pointer;
-        opacity: 1;
+        opacity: .0;
     }
 
     </style>
@@ -49,22 +54,32 @@
 
 
 <body>
-    <div class="slidecontainer">  
-        <p>Custom range slider:</p>
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    <div class="slidecontainer" id="changeBack">  
+        <p style="color:azure">Custom range slider:</p>
+        <input type="range" min="1" max="100" value="100" class="slider" id="myRange">
         <p style="color:bisque">Value: <span id="demo"></span></p>
     </div>
     
-    <br>
-
     <script>
+        var i = 0;
+        var arr = ["https://source.unsplash.com/GXOGGENgHnQ/1600x900", "https://source.unsplash.com/Jy6luiLBsrk/1600x900", "https://source.unsplash.com/sFLVTqNzG2I/1600x900"]
         var slider = document.getElementById("myRange");
+        var defVal = slider.value;
         var output = document.getElementById("demo");
-        output.innerHTML = slider.value; // Display the default slider value
-    
+        // Display the default slider value
+        output.innerHTML = slider.value;
+        
         // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function() {
+            var curVal = this.value;
             output.innerHTML = this.value;
+            if (defVal - curVal > 40){
+                i = i + 1;
+                if (i > arr.length-1){i = 0};
+                document.getElementById("changeBack").style.backgroundImage =  "url(" + arr[i] + ")";                 
+                console.log(i)
+                
+            }
         }
     </script>    
 </body>
