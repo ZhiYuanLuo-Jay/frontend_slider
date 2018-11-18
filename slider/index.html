@@ -7,7 +7,7 @@
     div {
         width: 300px;
         height: 300px;
-        transition: all 3.9s ease-in-out;
+        transition: all 1s ease-in-out;
         background-image: url(https://source.unsplash.com/GXOGGENgHnQ/1600x900);
     }
    
@@ -76,16 +76,19 @@
                 // alert("changeBack left");
                 var imgBack = document.getElementsByTagName("div")[0];
                 imgBack.style.backgroundImage = 'url(https://source.unsplash.com/Jy6luiLBsrk/1600x900)';
-                i = 0;                 
+                i = 0;             
+                console.log(i)    
             } else if (curVal-defVal>30 && i==1){
                 // alert("changeBack right");
                 var imgBack = document.getElementsByTagName("div")[0];
                 imgBack.style.backgroundImage = 'url(https://source.unsplash.com/sFLVTqNzG2I/1600x900)';
                 i = 2;
+                console.log(i)    
             } else if (i!==1){
                 var imgBack = document.getElementsByTagName("div")[0];
                 imgBack.style.backgroundImage = 'url(https://source.unsplash.com/GXOGGENgHnQ/1600x900)';
-                i = 1;                
+                i = 1;           
+                console.log(i)    
             }
 
         }
