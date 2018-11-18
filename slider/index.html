@@ -7,20 +7,12 @@
     div {
         width: 300px;
         height: 300px;
-        transition: all 6s ease-in-out;
+        transition: all 3.9s ease-in-out;
         background-image: url(https://source.unsplash.com/GXOGGENgHnQ/1600x900);
     }
    
     .slidecontainer {
         width: 100%;
-    }
-
-    #changeBack {
-        transition: all 3s ease-out;
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
     }
 
     .slider {
@@ -54,15 +46,15 @@
 
 
 <body>
-    <div class="slidecontainer" id="changeBack">  
-        <p style="color:azure">Custom range slider:</p>
-        <input type="range" min="1" max="100" value="100" class="slider" id="myRange">
+    <p style="color:rgb(18, 19, 19)">Custom range slider:</p>
+    <div class="slidecontainer">      
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
         <p style="color:bisque">Value: <span id="demo"></span></p>
     </div>
     
     <script>
-        var i = 0;
-        var arr = ["https://source.unsplash.com/GXOGGENgHnQ/1600x900", "https://source.unsplash.com/Jy6luiLBsrk/1600x900", "https://source.unsplash.com/sFLVTqNzG2I/1600x900"]
+        var i = 1;
+        // var arr = ["https://source.unsplash.com/GXOGGENgHnQ/1600x900", "https://source.unsplash.com/Jy6luiLBsrk/1600x900", "https://source.unsplash.com/sFLVTqNzG2I/1600x900"]
         var slider = document.getElementById("myRange");
         var defVal = slider.value;
         var output = document.getElementById("demo");
@@ -73,11 +65,29 @@
         slider.oninput = function() {
             var curVal = this.value;
             output.innerHTML = this.value;
-            if (defVal - curVal > 40){
-                i = i + 1;
-                if (i > arr.length-1){i = 0};
-                document.getElementById("changeBack").style.backgroundImage =  "url(" + arr[i] + ")";                                                 
+
+            // if (defVal - curVal > 40){
+            //     i = i + 1;
+            //     if (i > arr.length-1){i = 0};
+            //     document.getElementById("changeBack").style.backgroundImage =  "url(" + arr[i] + ")";                                                 
+            // }
+
+            if (curVal-defVal<-30 && i==1){
+                // alert("changeBack left");
+                var imgBack = document.getElementsByTagName("div")[0];
+                imgBack.style.backgroundImage = 'url(https://source.unsplash.com/Jy6luiLBsrk/1600x900)';
+                i = 0;                 
+            } else if (curVal-defVal>30 && i==1){
+                // alert("changeBack right");
+                var imgBack = document.getElementsByTagName("div")[0];
+                imgBack.style.backgroundImage = 'url(https://source.unsplash.com/sFLVTqNzG2I/1600x900)';
+                i = 2;
+            } else if (i!==1){
+                var imgBack = document.getElementsByTagName("div")[0];
+                imgBack.style.backgroundImage = 'url(https://source.unsplash.com/GXOGGENgHnQ/1600x900)';
+                i = 1;                
             }
+
         }
     </script>    
 </body>
